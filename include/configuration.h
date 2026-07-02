@@ -4,9 +4,9 @@
 #include <pwd.h>
 #include "util.h"
 
-#define STD_FOCUSING_TIME 25
-#define STD_RESTING_TIME 5
-#define STD_LONG_BREAK 10
+#define STD_FOCUSING_TIME 1500
+#define STD_RESTING_TIME 300
+#define STD_LONG_BREAK 600
 
 #define MAX_LINE 256
 

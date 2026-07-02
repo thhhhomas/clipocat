@@ -8,8 +8,7 @@
 * Temporizador de pausa (Break)
 * Animações ASCII de gato durante os ciclos
 * Configuração personalizada dos tempos de foco e pausa
-* Persistência das configurações em arquivo local
-* Interface simples baseada em menus
+* Gerenciamento de configurações por arquivo local
 
 ## Demonstração
 
@@ -34,80 +33,58 @@
 Utilize o GCC para compilar:
 
 ```bash
-gcc clipo.c -o clipo
+gcc src/* -o clipocat
 ```
 
 ## Execução
 
 ```bash
-./clipo
-```
-
-## Estrutura de Menus
-
-### Menu Principal
-
-```text
-1. Start focusing
-2. Configurations
-3. Exit
-```
-
-### Menu Pomodoro
-
-```text
-1. Start focusing
-2. Start pause
-3. Back to main menu
-```
-
-### Menu de Configurações
-
-```text
-1. Change focusing time
-2. Change pause time
-3. Save configurations
-4. Back to main menu
+./bin/clipocat
 ```
 
 ## Arquivo de Configuração
 
-As configurações são armazenadas em um arquivo chamado:
+O programa vai procurar por configurações pelo caminho:
 
 ```text
-config
+/home/youruser/.config/clipocat/clipocat.conf
 ```
 
 Formato:
 
 ```text
-25;5
+# Tempo de foco (em segundos)
+focusing_time=1500
+
+# Tempo de descanço (em segundos)
+resting_time=300
+
+# Tempo de descanço longo (em segundos)
+long_break=600
 ```
 
-Onde:
 
-* Primeiro valor = minutos de foco
-* Segundo valor = minutos de pausa
+## Exemplos de utilização
 
-Exemplo:
-
-```text
-50;10
+Executar modo de foco para 5 minutos
+```bash
+./bin/clipocat -m 1 -t 300
 ```
 
-Representa:
+Executar modo de descanço por 2 minutos
+```bash
+./bin/clipocat -m 2 -t 120
+```
 
-* 50 minutos de foco
-* 10 minutos de descanso
+Executar modo de descanço longo por 10 minutos
+```bash
+./bin/clipocat -m 2 -t 600
+```
 
-## Funcionamento
+### Pontos importantes
 
-Ao iniciar:
-
-1. O programa tenta ler o arquivo `config`.
-2. Caso o arquivo não exista, valores padrão são utilizados.
-3. O usuário pode alterar os tempos pelo menu de configurações.
-4. As alterações podem ser salvas para uso em futuras execuções.
+- O programa assumirá as configurações armazenadas no arquivo de configuração (caso este existe) se o usuário não definir o tempo por '-t'
+- Caso o programa não encontre as configurações no caminho esperado e não seja passado um valor de tempo, será assumido os valores de 25 minutos, 5 minutos e 10 minutos para o tempo de foco, o de descanço e o de descanço longo, respectivamente
 
 ## Dependências
 
